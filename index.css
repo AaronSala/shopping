@@ -1,0 +1,77 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    align-items: center;
+    text-align: center;
+}
+.header{
+    background: #777;
+    
+}
+.container{
+    align-items: center;
+    
+    max-width: 100%;
+    text-align: center;
+    margin: 0px auto;
+    columns: 2;
+    padding: 4rem ;
+    column-gap: 2;
+    
+}
+.container .card{
+    background: #eee;
+    max-width: 100%;
+    width:20rem ;
+    margin: 2rem auto;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.container .card img{
+    width: 20rem;
+    height: 18rem;
+    max-width: 100%;
+
+}
+.info{
+    padding:  .5rem ;
+  
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+.card .details{
+    color: rgb(9, 36, 110);
+    font-weight: 800;
+    font-size: 20px;
+}
+.card .price{
+    color: crimson;
+    font-size: 24px;
+    font-weight: bolder;
+}
+.card button{
+    background: darkgreen;
+    padding: .5rem;
+    border-radius: .5rem;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+}
+.cart table{
+    columns: green;
+    text-align: center;
+    align-items: center;
+    width: 80%;
+}
+.cart{
+    padding: 1rem 2rem;
+}
+.cart table th{
+    border-bottom: 2px solid #333;
+    
+}
