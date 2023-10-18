@@ -32,6 +32,8 @@ let shopItemsData = [
 }
 ];
 
+let basket = [];
+
 let generateShop =()=>{
  return (shop.innerHTML=shopItemsData
     .map((x)=>{
@@ -45,9 +47,9 @@ let generateShop =()=>{
                    <div class="price-quantity">
                        <h2>Ksh ${price}</h2>
                        <div class="buttons">
-                          <i onclick="decrement()" class="bi bi-dash"></i>
+                          <i onclick="decrement(${id})" class="bi bi-dash"></i>
                             <div id=${id} class="quantity">0</div>
-                          <i onclick = "increment()" class="bi bi-plus"></i>
+                          <i onclick = "increment(${id})" class="bi bi-plus"></i>
                         </div>
                   </div>
             </div>
@@ -59,13 +61,53 @@ let generateShop =()=>{
 generateShop()
 
 
-let increment = ()=>{
-    console.log('increment');
+let increment = (id)=>{
+    let selectedItem =id
+    let search =basket.find((x)=>x.id ===selectedItem);
+
+    if(search === undefined){
+        basket.push({
+            id: selectedItem, 
+            item:1
+         });
+    }
+    else{
+       search.item+=1
+    }
+//console.log( basket);
+update(selectedItem);
 };
 
-let decrement = ()=>{
-    console.log('decrement');
+//decreamenting the numbers per item selected
+let decrement = (id)=>{
+    let selectedItem =id
+    let search =basket.find((x)=>x.id ===selectedItem);
+
+    if(search.item=== 0)return;
+    
+    else{
+       search.item-=1
+    }
+//console.log( basket);
+update(selectedItem)
 };
-let update = ()=>{};
+
+/**
+ * !updating the cart number of items per item
+ * */
+let update = (id)=>{
+    let search = basket.find((x)=>x.id ===id)
+//console.log(search.item);
+document.getElementById(id).innerHTML = search.item;
+calculation()
+//document.getElementById(id.price).innerHTML=search.item
+};
+
+let calculation = ()=>{
+    let cartIcon = document.getElementById("cart-amount")
+    cartIcon.innerHTML=basket.map((x)=>x.item).reduce((x,y)=> x+y, 0)
+
+
+}
 
 
