@@ -32,12 +32,13 @@ let shopItemsData = [
 }
 ];
 
-let basket = [];
+let basket = JSON.parse(localStorage.getItem("data")) || [];
 
 let generateShop =()=>{
  return (shop.innerHTML=shopItemsData
     .map((x)=>{
         let {id, name, price, desc, img}=x;
+        let search = basket.find((x)=>x.id === id) || [];
    return `
  <div id=product-id-${id} class="item">
             <img width="220" height=210 src=${img} alt="">
@@ -48,7 +49,9 @@ let generateShop =()=>{
                        <h2>Ksh ${price}</h2>
                        <div class="buttons">
                           <i onclick="decrement(${id})" class="bi bi-dash"></i>
-                            <div id=${id} class="quantity">0</div>
+                            <div id=${id} class="quantity">
+                            ${search.item === undefined? 0: search.item}
+                            </div>
                           <i onclick = "increment(${id})" class="bi bi-plus"></i>
                         </div>
                   </div>
@@ -74,8 +77,11 @@ let increment = (id)=>{
     else{
        search.item+=1
     }
+   
+
 //console.log( basket);
 update(selectedItem);
+localStorage.setItem("data", JSON.stringify(basket));
 };
 
 //decreamenting the numbers per item selected
@@ -83,13 +89,19 @@ let decrement = (id)=>{
     let selectedItem =id
     let search =basket.find((x)=>x.id ===selectedItem);
 
+
+    if(search === undefined) return;
     if(search.item=== 0)return;
     
     else{
        search.item-=1
     }
+    update(selectedItem)
+    //filtering the basket from the local storage
+    basket = basket.filter((x)=> x.item !== 0)
 //console.log( basket);
-update(selectedItem)
+
+localStorage.setItem("data", JSON.stringify(basket))
 };
 
 /**
@@ -110,4 +122,4 @@ let calculation = ()=>{
 
 }
 
-
+calculation();
