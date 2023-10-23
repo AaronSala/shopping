@@ -15,19 +15,19 @@ let generateCartItems =()=>{
     if(basket.length !== 0) {
       return (shoppingCart.innerHTML=basket.map((x)=>{
 
-        console.log(x);
         let {id, item}=x;
         let search = shopItemsData.find((y)=>y.id === id) || [];
+        let {name, price,img} = search
         return `
           <div class="cart-item"> 
-          <img  width="100"  src=/${search.img}  />
+          <img  width="100"  src=/${img}  />
           <div class="details">
             <div class="title-price-x">
                <h4 class="title-price">
-               <p>${search.name}</p>
-               <p class="cart-item-price">ksh ${search.price}</p>
+               <p>${name}</p>
+               <p class="cart-item-price">ksh ${price}</p>
                </h4>
-               <i class="bi bi-x"></i>
+               <i onclick = "removeItem(${id})"  class="bi bi-x"></i>
             </div>
 
                  <div class="buttons">
@@ -72,7 +72,7 @@ let increment = (id)=>{
     }
    
 
-//console.log( basket);
+    generateCartItems()
 update(selectedItem);
 localStorage.setItem("data", JSON.stringify(basket));
 };
@@ -101,5 +101,42 @@ let update = (id)=>{
 //console.log(search.item);
 document.getElementById(id).innerHTML = search.item;
 calculation()
+TotalAmount()
 //document.getElementById(id.price).innerHTML=search.item
 };
+
+let removeItem = (id)=>{
+    let selectedItem = id
+    console.log(selectedItem);
+    basket = basket.filter((x)=>x.id !== selectedItem);
+    generateCartItems()
+    TotalAmount()
+    calculation()
+    localStorage.setItem("data", JSON.stringify(basket))
+}
+
+let clearCart = ()=>{
+    basket=[]
+    generateCartItems()
+    calculation()
+    localStorage.setItem("data", JSON.stringify(basket));
+}
+
+let TotalAmount = ()=> {
+   if(basket.length !==0){
+      let amount = basket.map((x)=>{
+        let {item, id}=x;
+        let search = shopItemsData.find((y)=>y.id === id) || [];
+        return item*search.price;
+      }).reduce((x,y)=>x+y, 0)
+      label.innerHTML=`
+      <h2>Total Bill: Ksh ${amount}</h2>
+      <button class="checkout">Check out</button>
+      <button onclick = "clearCart()" class="removeall">Clear Cart</button>
+      `
+   }
+   else{
+
+   }
+}
+TotalAmount()
