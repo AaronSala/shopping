@@ -150,3 +150,52 @@ color: red;
     text-align: center;
     align-items: center;
 }
+
+.text-center{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.HomeBtn{
+    background-color: #212529;
+    color: #fff;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+.bi-x{
+    color: red;
+    font-weight: bold;
+}
+
+.shopping-cart{
+   justify-content: center;
+   display: grid; 
+   gap: 15px;
+   grid-template-columns: repeat(1, 370px);
+}
+.cart-item{
+    border: 2px solid #555;
+    border-radius: 5px;
+    display: flex;
+}
+
+.title-price-x{
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.title-price{
+ display: flex;
+ align-items: center;  
+ gap: 5px; 
+}
+.cart-item-price{
+    background-color: #212529;
+    color: #fff;
+    padding: 3px 6px;
+    border-radius: 4px;
+}
